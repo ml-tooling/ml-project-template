@@ -15,7 +15,7 @@
 Run the training job by executing this command with your chosen configuration:
 
 ```bash
-docker run docker.wdf.sap.corp:51150/com.sap.sapai.ticketing/ticketing-training-job:latest
+docker run training-job-template:latest
 ```
 
 Note: for testing/debugging the job, make sure to set `DEBUG` to 1 (uses less data and smaller models).
@@ -25,7 +25,7 @@ Note: for testing/debugging the job, make sure to set `DEBUG` to 1 (uses less da
 Alternatively, the training can be accelerated using multiple GPUs (with IDs defined with `NVIDIA_VISIBLE_DEVICES`):
 
 ```bash
-docker run --runtime=nvidia docker.wdf.sap.corp:51150/com.sap.sapai.ticketing/ticketing-training-job:latest
+docker run --runtime=nvidia training-job-template:latest
 ```
 
 ### Environment variables
