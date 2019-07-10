@@ -59,7 +59,7 @@ RUN \
 # # Set up paths for resources and data
 ENV _RESOURCES_PATH="/resources" \ 
      DATA_PATH="/data"
-
+     
 RUN \
     mkdir -p $_RESOURCES_PATH && \
     mkdir -p $DATA_PATH && \
