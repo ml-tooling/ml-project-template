@@ -2,43 +2,33 @@
 
 ------
 
-## Input
-
-## Pipeline
-
-## Output
-
-## Metrics
+## Description
 
 ## Usage
 
 Run the training job by executing this command with your chosen configuration:
 
 ```bash
-docker run docker.wdf.sap.corp:51150/com.sap.sapai.ticketing/ticketing-training-job:latest
+docker run training-job-template
 ```
 
-Note: for testing/debugging the job, make sure to set `DEBUG` to 1 (uses less data and smaller models).
-
-### GPU training
-
-Alternatively, the training can be accelerated using multiple GPUs (with IDs defined with `NVIDIA_VISIBLE_DEVICES`):
-
+Execute this command for interactive run mode:
 ```bash
-docker run --runtime=nvidia docker.wdf.sap.corp:51150/com.sap.sapai.ticketing/ticketing-training-job:latest
+docker run -it --entrypoint=/bin/bash training-job-template
 ```
+
 
 ### Environment variables
 
 The training job can be parametrized with environment variables. These can be defined by passing an [environment file](https://docs.docker.com/compose/compose-file/#env_file) via `--env-file=={env_file}` to `docker run`. To learn about available variables, click [here](#parameters).
-
-Note, that you can also directly start the job with the Studio UI.
-
+#
 ### Configuration
 
 #### Parameters
 
 The training job can be configured with following environment variables:
+
+Example variables:
 
 <table>
     <tr>
@@ -47,88 +37,31 @@ The training job can be configured with following environment variables:
         <th>Default</th>
     </tr>
      <tr>
-        <td>DATASET_KEY</td>
-        <td>Key of the input dataset in CSV format.</td>
-        <td>datasets/it_tickets.csv</td>
+        <td>TRAIN_SET_URL</td>
+        <td>url to training data</td>
+        <td></td>
     </tr>
     <tr>
-        <td>VECTORS_KEY</td>
-        <td>Optional pretrained word vectors to used to improve training. See the above `Input` section for details. </td>
-        <td>""</td>
+        <td>TEST_SET_URL</td>
+        <td>url to test data</td>
+        <td></td>
     </tr>
-    <tr>
-        <td>PREPROCESSING</td>
-        <td>Preprocessing level of input, one of {'fully', 'partly'}.</td>
-        <td>fully</td>
-    </tr>
-    <tr>
-        <td>SEP</td>
-        <td>Separator character used for the input CSV file.</td>
-        <td>;</td>
-    </tr>
-    <tr>
-        <td>TEST_SIZE</td>
-        <td>Relative size (percentage) of data used as a hold-out test set.</td>
-        <td>0.05</td>
-    </tr>
-    <tr>
-        <td>NUM_WORKERS</td>
-        <td>Number of CPU cores used for processing.</td>
-        <td>8</td>
-    </tr>
-    <tr>
-        <td>OMP_NUM_THREADS</td>
-        <td>Number of threads used by OpenMP (should equal to the no. of physical cores available).</td>
-        <td>8</td>
-    </tr>
-    <tr>
-        <td>NVIDIA_VISIBLE_DEVICES</td>
-        <td>Cuda device IDs to use for PyTorch training (if available).</td>
-        <td>all</td>
-    <tr>
-        <td>UPLOAD_EXPERIMENT</td>
-        <td>Whether to upload the entire experiment folder to Studio (if connected).</td>
-        <td>0</td>
-    </tr>
-    <tr>
-        <td>DEPLOY_MODEL</td>
-        <td>Whether to upload and deploy final model artifact (stacked ensemble, predicting categories in an end-to-end fashion).</td>
-        <td>1</td>
-    </tr>
-    <tr>
         <td>SEED</td>
         <td>Global seed used for random numbers.</td>
         <td>42</td>
     </tr>
-    <tr>
-        <td>DEBUG</td>
-        <td>Debug mode to test the entire pipeline with a subset of data and short trainings.</td>
-        <td>0</td>
+        <td colspan="3">AWS config </td>
     </tr>
     <tr>
-        <td colspan="3">Studio Configuration (will be automatically attached when started in Studio):</td>
-    </tr>
-    <tr>
-        <td>STUDIO_ENDPOINT</td>
-        <td>Endpoint URL of an ML Studio instance.</td>
+        <td>acces_key</td>
+        <td>AWS access key</td>
         <td>(required)</td>
     </tr>
     <tr>
-        <td>STUDIO_PROJECT</td>
-        <td>Specified project of an ML Studio Instance.</td>
+        <td>S3 bucket</td>
+        <td>url to S3 bucket containing data</td>
         <td>(required)</td>
     </tr>
-    <tr>
-        <td>STUDIO_API_TOKEN</td>
-        <td>API Token to access the REST API of an ML Studio instance.</td>
-        <td>(optional)</td>
-    </tr>
-    <tr>
-        <td>EXPERIMENT_NAME</td>
-        <td>Name of the experiment.</td>
-        <td>Ticketing Model Training</td>
-    </tr>
-
    
 </table>
 

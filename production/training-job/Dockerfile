@@ -56,20 +56,18 @@ RUN \
     conda clean -ya
 
 
-# # Set up paths & Install Studio library & other internal libs
-ENV _RESOURCES_PATH="/resources"
+# # Set up paths for resources and data
+ENV _RESOURCES_PATH="/resources" \ 
+     DATA_PATH="/data"
 
-RUN mkdir -p $_RESOURCES_PATH
-
-# RUN \
-#     mkdir -p $_RESOURCES_PATH && \
-#     mkdir -p $DATA_ENVIRONMENT && \
-#     chmod -R a+rwx $DATA_ENVIRONMENT
-
+RUN \
+    mkdir -p $_RESOURCES_PATH && \
+    mkdir -p $DATA_PATH && \
+    chmod -R a+rwx $DATA_PATH
 
 # Install Training Requirements
-# RUN \
-#     conda clean -ya
 
+
+# Run job
 COPY docker-res/run.py "$_RESOURCES_PATH/"
 CMD ["python", "/resources/run.py"]
