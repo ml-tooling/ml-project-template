@@ -11,11 +11,8 @@ RUN \
         ca-certificates \
         curl libcurl3 \
         zlibc zlib1g zlib1g-dev \
-        # Fix problem with matplotlib using a GUI backend 
-        libgl1-mesa-glx \ 
         software-properties-common \
         git \
-        wget \
         locales \
         gcc \
         unzip && \
@@ -52,7 +49,6 @@ RUN \
     conda install -y setuptools && \    
     pip install --upgrade pip && \
     pip install --upgrade Cython && \
-    pip install --upgrade --no-cache-dir tqdm && \
     conda clean -ya
 
 
