@@ -109,10 +109,10 @@ python build.py --help
 
 #### Configure Docker Repository
 
-In order to pull and push docker containers, the <DOCKER REPOSITORY> needs to be configured:
+In order to pull and push docker containers, a Docker registry  needs to be configured:
 
 ```bash
-docker login <docker repo>
+docker login <server>
 ```
 
 and your user and password to login.
