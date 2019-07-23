@@ -1,4 +1,7 @@
-FROM ubuntu:16.04
+FROM ubuntu:16.04 
+# use "nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04" for GPU support
+ARG PYTHON_VERSION=3.7
+
 
 # Install basics
 RUN \
@@ -48,22 +51,22 @@ ENV LANG=en_US.UTF-8 \
 RUN \
     conda install -y setuptools && \    
     pip install --upgrade pip && \
-    pip install --upgrade Cython && \
     conda clean -ya
 
+# Install training requirements
+COPY docker-res/requirements.txt "/tmp/"
+RUN pip install -r "tmp/requirements.txt"
 
-# # Set up paths for resources and data
-ENV _RESOURCES_PATH="/resources" \ 
+# Set up paths for resources and data
+ENV RESOURCES_PATH="/resources" \ 
      DATA_PATH="/data"
      
 RUN \
-    mkdir -p $_RESOURCES_PATH && \
+    mkdir -p $RESOURCES_PATH && \
     mkdir -p $DATA_PATH && \
     chmod -R a+rwx $DATA_PATH
 
-# Install Training Requirements
-
 
 # Run job
-COPY docker-res/run.py "$_RESOURCES_PATH/"
+COPY docker-res/run.py "$RESOURCES_PATH/"
 CMD ["python", "/resources/run.py"]
