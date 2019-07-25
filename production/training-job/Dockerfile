@@ -2,7 +2,6 @@ FROM ubuntu:16.04
 # use "nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04" for GPU support
 ARG PYTHON_VERSION=3.7
 
-
 # Install basics
 RUN \
     apt-get update && \
@@ -32,7 +31,7 @@ RUN \
 RUN git config --global core.fileMode false && \
     git config --global http.sslVerify false
 
-# Install Miniconda Python 3.6 & PyTorch cuda10
+# Install Miniconda
 RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
      chmod +x ~/miniconda.sh && \
      ~/miniconda.sh -b -p /opt/conda && \
@@ -65,7 +64,6 @@ RUN \
     mkdir -p $RESOURCES_PATH && \
     mkdir -p $DATA_PATH && \
     chmod -R a+rwx $DATA_PATH
-
 
 # Run job
 COPY docker-res/run.py "$RESOURCES_PATH/"
