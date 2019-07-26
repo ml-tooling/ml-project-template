@@ -4,26 +4,40 @@
 
 ## Description
 
-## Usage
+For example: 
 
-Run the training job by executing this command with your chosen configuration:
+_This container trains a recommendation model for users based on their reading habits._
+
+## Usage 
+
+Run the job by executing this command with your chosen configuration, exposing port 5000 to the outside world:
 
 ```bash
-docker run training-job-template
+docker run -p 5000:5000 training-job-template
 ```
 
-``bash
+To enable the Nvidia Container Runtime for GPU-acceleration, execute:
+
+```bash
+docker run --runtime=nvidia training-job-template
+```
 
 Execute this command for interactive run mode:
 ```bash
 docker run -it --entrypoint=/bin/bash training-job-template
 ```
 
+More options:
+
+* publish the container's port 5000 via to `host_port` usinng `-p {host_port}:5000`
+* for testing purposes (fast execution), run with `--env-file==test.env`.
+* run in detached mode usingn `-d`
+
 
 ### Environment variables
 
 The training job can be parametrized with environment variables. These can be defined by passing an [environment file](https://docs.docker.com/compose/compose-file/#env_file) via `--env-file=={env_file}` to `docker run`. To learn about available variables, click [here](#parameters).
-#
+
 ### Configuration
 
 #### Parameters
