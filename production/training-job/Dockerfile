@@ -34,7 +34,7 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
      chmod +x ~/miniconda.sh && \
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
-     /opt/conda/bin/conda install -y python=$PYTHON_VERSION cython typing && \
+     /opt/conda/bin/conda install -y python=$PYTHON_VERSION typing && \
      /opt/conda/bin/conda clean -ya
 
 ENV PATH /opt/conda/bin:$PATH
@@ -47,23 +47,24 @@ ENV LANG=en_US.UTF-8 \
 # Update python basics
 RUN \
     conda install -y setuptools && \    
-    pip install --upgrade pip && \
-    pip install --upgrade Cython && \
+    pip install --upgrade pip
+
+
+# Install training and app requirements
+COPY docker-res/requirements.txt "/tmp/"
+RUN pip install -r "tmp/requirements.txt" && \
     conda clean -ya
 
-
 # # Set up paths for resources and data
-ENV _RESOURCES_PATH="/resources" \ 
+ENV RESOURCES_PATH="/resources" \ 
      DATA_PATH="/data"
      
 RUN \
-    mkdir -p $_RESOURCES_PATH && \
+    mkdir -p $RESOURCES_PATH && \
     mkdir -p $DATA_PATH && \
     chmod -R a+rwx $DATA_PATH
 
-# Install Training Requirements
 
-
-# Run job
-COPY docker-res/run.py "$_RESOURCES_PATH/"
+# Copy resource and run job
+COPY docker-res/run.py "$RESOURCES_PATH/"
 CMD ["python", "/resources/run.py"]
