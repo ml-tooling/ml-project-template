@@ -12,6 +12,8 @@ Run the training job by executing this command with your chosen configuration:
 docker run training-job-template
 ```
 
+``bash
+
 Execute this command for interactive run mode:
 ```bash
 docker run -it --entrypoint=/bin/bash training-job-template

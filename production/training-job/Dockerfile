@@ -1,35 +1,37 @@
-FROM ubuntu:16.04
+FROM ubuntu:16.04 
+# use "nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04" for GPU runtime 
+ARG PYTHON_VERSION=3.7
 
 # Install basics
 RUN \
-    apt-get update && \
-    apt-get install sudo --yes && \
-    apt-get install --yes --no-install-recommends  \
-        wget \
-        build-essential \
-        cmake \
-        ca-certificates \
-        curl libcurl3 \
-        zlibc zlib1g zlib1g-dev \
-        software-properties-common \
-        git \
-        locales \
-        gcc \
-        unzip && \
-    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
-    locale-gen && \
-    chmod -R a+rwx /usr/local/bin/ && \
-    # Clean up
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /root/.cache/* && \
-    rm -rf /tmp/*
+     apt-get update && \
+     apt-get install sudo --yes && \
+     apt-get install --yes --no-install-recommends  \
+     wget \
+     build-essential \
+     cmake \
+     ca-certificates \
+     curl libcurl3 \
+     zlibc zlib1g zlib1g-dev \
+     software-properties-common \
+     git \
+     locales \
+     gcc \
+     unzip && \
+     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+     locale-gen && \
+     chmod -R a+rwx /usr/local/bin/ && \
+     # Clean up
+     apt-get clean && \
+     rm -rf /var/lib/apt/lists/* && \
+     rm -rf /root/.cache/* && \
+     rm -rf /tmp/*
 
 # Configure git
 RUN git config --global core.fileMode false && \
-    git config --global http.sslVerify false
+     git config --global http.sslVerify false
 
-# Install Miniconda Python 3.6 & PyTorch cuda10
+# Install Miniconda
 RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
      chmod +x ~/miniconda.sh && \
      ~/miniconda.sh -b -p /opt/conda && \
@@ -40,30 +42,28 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
 ENV PATH /opt/conda/bin:$PATH
 
 ENV LANG=en_US.UTF-8 \
-    LC_ALL=en_US.UTF-8 \
-    LANGUAGE=en_US.UTF-8 \
-    XDG_CACHE_HOME="/root/.cache/"
+     LC_ALL=en_US.UTF-8 \
+     LANGUAGE=en_US.UTF-8 \
+     XDG_CACHE_HOME="/root/.cache/"
 
 # Update python basics
 RUN \
-    conda install -y setuptools && \    
-    pip install --upgrade pip
-
+     conda install -y setuptools && \    
+     pip install --upgrade pip
 
 # Install training and app requirements
 COPY docker-res/requirements.txt "/tmp/"
 RUN pip install -r "tmp/requirements.txt" && \
-    conda clean -ya
+     conda clean -ya
 
 # # Set up paths for resources and data
 ENV RESOURCES_PATH="/resources" \ 
      DATA_PATH="/data"
-     
-RUN \
-    mkdir -p $RESOURCES_PATH && \
-    mkdir -p $DATA_PATH && \
-    chmod -R a+rwx $DATA_PATH
 
+RUN \
+     mkdir -p $RESOURCES_PATH && \
+     mkdir -p $DATA_PATH && \
+     chmod -R a+rwx $DATA_PATH
 
 # Copy resource and run job
 COPY docker-res/run.py "$RESOURCES_PATH/"
