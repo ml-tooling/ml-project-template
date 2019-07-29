@@ -9,7 +9,6 @@ parser.add_argument('--proxy', help="proxy server to use (for both http and http
 parser.add_argument('--image_prefix', help='image prefix to use', default="")
 parser.add_argument('--deploy', help='deploy docker container to remote', action='store_true')
 
-
 args, unknown = parser.parse_known_args()
 if unknown:
     print("Unknown arguments "+str(unknown))

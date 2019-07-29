@@ -62,11 +62,31 @@ Example variables:
         <td>url to test data</td>
         <td></td>
     </tr>
+    <tr>
+        <td>N_EPOCHS</td>
+        <td>no. training epochs</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>NVIDIA_VISIBLE_DEVICES</td>
+        <td>Controls which GPUs will be accessible inside the container.</td>
+        <td>all</td>
+    </tr>
+    <tr>
+        <td>OMP_NUM_THREADS</td>
+        <td>No. of OpenMP threads used by PyTorch. Shouldn't exceed the no. of physical threads.</td>
+        <td>8</td>
+    </tr>
+    <tr>
         <td>SEED</td>
         <td>Global seed used for random numbers.</td>
         <td>42</td>
     </tr>
-        <td colspan="3">AWS config </td>
+    <tr>
+        <td colspan="3"></td>
+    </tr>
+    </tr>
+        <td colspan="3"> AWS config </td>
     </tr>
     <tr>
         <td>acces_key</td>
