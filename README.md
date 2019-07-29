@@ -1,2 +1,2 @@
 # docker-job-template
-Dockerized job template for general, reproducible model training.
+Containerized training job template for reproducible model fitting.
