@@ -83,10 +83,7 @@ Example variables:
         <td>42</td>
     </tr>
     <tr>
-        <td colspan="3"></td>
-    </tr>
-    </tr>
-        <td colspan="3"> AWS config </td>
+        <td colspan="3"><b> AWS Config: </d></td>
     </tr>
     <tr>
         <td>acces_key</td>
