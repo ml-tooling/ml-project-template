@@ -1,12 +1,7 @@
 # Docker job template
 
-------
-
 ## Description
 
-For example: 
-
-_This container trains a recommendation model for users based on their reading habits._
 
 ## Usage 
 
@@ -44,7 +39,6 @@ The training job can be parametrized with environment variables. These can be de
 
 The training job can be configured with following environment variables:
 
-Example variables:
 
 <table>
     <tr>
@@ -52,7 +46,10 @@ Example variables:
         <th>Description</th>
         <th>Default</th>
     </tr>
-     <tr>
+    <tr>
+        <td colspan="3"><b>Training Config:</d></td>
+    </tr>
+    <tr>
         <td>TRAIN_SET_URL</td>
         <td>url to training data</td>
         <td></td>
@@ -83,17 +80,7 @@ Example variables:
         <td>42</td>
     </tr>
     <tr>
-        <td colspan="3"><b> AWS Config: </d></td>
-    </tr>
-    <tr>
-        <td>acces_key</td>
-        <td>AWS access key</td>
-        <td>(required)</td>
-    </tr>
-    <tr>
-        <td>S3 bucket</td>
-        <td>url to S3 bucket containing data</td>
-        <td>(required)</td>
+        <td colspan="3"><b>Cloud Config:</d></td>
     </tr>
    
 </table>
