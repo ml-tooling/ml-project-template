@@ -9,13 +9,13 @@
 Install via pip:
 
 ```bash
-pip install --upgrade git+https://github.wdf.sap.corp/ml-tooling/ml-project-template#subdirectory=production/python-utils-lib
+pip install --upgrade git+https://github.com/ml-tooling/ml-project-template#subdirectory=production/python-utils-lib
 ```
 
 or directly from the source code:
 
 ```bash
-git clone https://github.wdf.sap.corp/ml-tooling/ml-project-template.git
+git clone https://github.com/ml-tooling/ml-project-template.git
 cd ./production/python-utils-lib/
 python setup.py install
 
