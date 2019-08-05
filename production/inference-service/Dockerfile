@@ -3,8 +3,7 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
 RUN \
     apt-get update && \
     apt-get install sudo --yes && \
-    apt-get install --yes --no-install-recommends \
-     git \
+    apt-get install --yes --no-install-recommends git && \
     chmod -R a+rwx /usr/local/bin/ && \
      # Clean up
     apt-get clean && \

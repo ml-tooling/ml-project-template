@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
     
-    x, y = get_data(seed=10)
+    x, y = get_data(seed=SEED)
   
     # PREPROCESSING
     data = DataBunch(x, y)
