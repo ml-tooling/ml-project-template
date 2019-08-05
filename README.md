@@ -5,6 +5,7 @@ This repository contains an opinionated template project that can be easily adap
 * research: structured prototyping for fast iterations
 * production: reproducible, encapsulated solution via using Docker containers
 
+
 ---
 
 ## Repository Structure
@@ -14,7 +15,7 @@ This repository contains an opinionated template project that can be easily adap
   - **[deliver](./research/deliver)** (Python): Refactored notebooks that contain valuable insights or results (e.g. visualizations, training runs). Notebooks should be refactored, documented, contain outputs, and use the following naming schema: `YYYY-MM-DD_short-description`. Notebooks in deliver should not be changed or rerun. If you want to rerun a deliver Notebook, please duplicate it into the develop folder.
   - **[templates](./research/templates)** (Python): Refactored Notebooks that are reusable for a specific task (e.g. model training, data exploration). Notebooks should be refactored, documented, not contain any output, and use the following naming schema: `short-description`. If you like to make use of a template Notebook, duplicate the notebook into develop folder.
 - **[production](./production)**: The production-ready solution(s) composed of libraries, services, and jobs.
-  - **[python-utils-lib](./production/python-utils-lib)** (Python): Utility functions that are reused across multiple notebooks/scripts. Should only contain refactored and tested Python scripts/modules. Installable via pip.
+  - **[python-utils-lib](./production/python-utils-lib)** (Python): Utility functions that are distilled from the research phase and used across multiple scripts. Should only contain refactored and tested Python scripts/modules. Installable via pip.
   - **[training-job](./production/training-job)** (Python/Docker): Combines required data exports, preprocessing and training scripts into a Docker container. This makes results reproducible and the production model retrainable in _any_ ennvironment.
   - **[inference-service](./production/inference-service)** (Python/Docker): Docker container that provides the final model prediction capabilities via a REST API.
 
