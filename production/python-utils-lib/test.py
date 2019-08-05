@@ -2,8 +2,8 @@ import logging
 logging.basicConfig(
     format='%(asctime)s [%(levelname)s] %(message)s', level=logging.INFO)
 
-from training_utils.trainer import Trainer
-from training_utils.data import get_data, DataBunch
+from utils.trainer import Trainer
+from utils.data import get_data, DataBunch
 
 x, y = get_data(seed=10)
 data = DataBunch(x, y)

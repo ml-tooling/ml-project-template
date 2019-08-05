@@ -11,8 +11,8 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'training-utils'
-MAIN_PACKAGE = 'training_utils'  # Change if main package != NAME
+NAME = 'utils'
+MAIN_PACKAGE = 'utils'  # Change if main package != NAME
 DESCRIPTION = 'Utility functionality for training.'
 URL = ''
 EMAIL = 'oliver.atanaszov@gmail.com'
