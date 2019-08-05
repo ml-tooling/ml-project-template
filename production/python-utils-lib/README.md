@@ -18,6 +18,7 @@ or directly from the source code:
 git clone https://github.com/ml-tooling/ml-project-template.git
 cd ./production/python-utils-lib/
 python setup.py install
+```
 
 ## Usage
 
