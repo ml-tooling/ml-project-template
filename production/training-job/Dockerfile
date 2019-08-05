@@ -1,4 +1,4 @@
-# use "nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04" for GPU runtime 
+# use "nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04" instead for GPU runtime 
 FROM ubuntu:16.04 
 
 # Python version
@@ -23,14 +23,28 @@ ENV LC_ALL="en_US.UTF-8" \
 RUN \
     apt-get update && \
     apt-get install sudo --yes && \
-    apt-get install --yes --no-install-recommends  \
-    wget \
-    curl && \
-    chmod -R a+rwx /usr/local/bin/
+    apt-get install --yes --no-install-recommends \
+     git \
+     wget \
+     curl \
+     ca-certificates && \
+    chmod -R a+rwx /usr/local/bin/ && \
+     # Clean up
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /root/.cache/* && \
+    rm -rf /tmp/*
 
-# Add tini for init
-RUN wget --quiet https://github.com/krallin/tini/releases/download/v0.18.0/tini -O /tini && \
-    chmod +x /tini
+# Configure git
+RUN git config --global core.fileMode false && \
+    git config --global http.sslVerify false
+
+# Add tini
+ADD https://github.com/krallin/tini/releases/download/v0.18.0/tini /tini
+RUN chmod +x /tini
+
+# RUN wget --quiet https://github.com/krallin/tini/releases/download/v0.18.0/tini -O /tini && \
+#     chmod +x /tini
 
 # Install Miniconda + some basics
 ARG MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -45,9 +59,11 @@ RUN \
 
 ENV PATH /opt/conda/bin:$PATH
 
-# Install training requirements
-# COPY docker-res/requirements.txt "/tmp/"
-# RUN pip install -r "tmp/requirements.txt"
+
+
+# Install utils
+RUN \
+      pip install --no-cache-dir --upgrade git+https://github.com/ml-tooling/ml-project-template#subdirectory=production/python-utils-lib
 
 
 # Set *predefined* paths/variables
@@ -70,5 +86,8 @@ ENV N_EPOCHS="10" \
 COPY docker-res/run.py "$RESOURCES_PATH/"
 COPY docker-res/config.py "$RESOURCES_PATH/"
 
-# Run run.py via tini
-ENTRYPOINT ["/tini", "--", "python", "/resources/run.py"]
+# Add tini as entrpoint
+ENTRYPOINT ["/tini", "--"]
+
+# Run run.py 
+CMD ["python", "/resources/run.py"]

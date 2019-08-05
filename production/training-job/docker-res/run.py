@@ -1,4 +1,7 @@
 #!/usr/bin/python
+'''
+This script is run when the job image is loaded.
+'''
 
 import os
 import sys
