@@ -7,7 +7,7 @@ This is the space for production code: tested Python libs, jobs and services.
 
 ### Requirements
 
-- Java 8, Python 3, Maven, Docker
+- Python 3, Docker
 
 ### Docker Build
 
