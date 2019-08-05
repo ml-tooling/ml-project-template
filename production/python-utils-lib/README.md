@@ -1,4 +1,8 @@
 # Python utils used across the project
+The lib contains 3 main modules:
+- **[data.py](./utils/data.py)**: data loading, handling, preprocessing
+- **[trainer.py](./utils/trainer.py)**: model training
+- **[inference.py](./utils/inference.py)**: model inference for deployment
 
 ## Requirements
 
