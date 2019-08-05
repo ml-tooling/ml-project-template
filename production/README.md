@@ -1,3 +1,2 @@
 # Production
-
-This is the space for production code: distilled utils and the actual training job implementation should be here.
+This is the space for production code: distilled utils, job implementations (e.g. training, deploy etc.) should be here.
