@@ -2,7 +2,7 @@
 
 This repository contains an opinionated template project that can be easily adapted for all kinds of Machine Learning tasks. Typically, such project entails two main phases, _research_ and _production_. The template intends to guide practitioners to adopt some best practices with regards to:
 
-* research: structured prototyping phase for fast iterations
+* research: structured prototyping for fast iterations
 * production: reproducible, encapsulated solution via using Docker containers
 
 ---
