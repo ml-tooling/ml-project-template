@@ -8,7 +8,7 @@
 Run the job by executing this command with your chosen configuration, exposing port 5000 to the outside world:
 
 ```bash
-docker run -p 5000:5000 training-job-template
+docker run training-job-template
 ```
 
 To enable the Nvidia Container Runtime for GPU-acceleration, execute:
