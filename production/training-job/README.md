@@ -50,34 +50,32 @@ The training job can be configured with following environment variables:
         <td colspan="3"><b>Training Config:</d></td>
     </tr>
     <tr>
-        <td>TRAIN_SET_URL</td>
-        <td>url to training data</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>TEST_SET_URL</td>
-        <td>url to test data</td>
-        <td></td>
-    </tr>
-    <tr>
         <td>N_EPOCHS</td>
         <td>no. training epochs</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>NVIDIA_VISIBLE_DEVICES</td>
-        <td>Controls which GPUs will be accessible inside the container.</td>
-        <td>all</td>
-    </tr>
-    <tr>
-        <td>OMP_NUM_THREADS</td>
-        <td>No. of OpenMP threads used by PyTorch. Shouldn't exceed the no. of physical threads.</td>
-        <td>8</td>
+        <td>10</td>
     </tr>
     <tr>
         <td>SEED</td>
         <td>Global seed used for random numbers.</td>
         <td>42</td>
+    </tr>
+    <tr>
+        <td colspan="3"><b>Computation Config:</d></td>
+    </tr>
+    <tr>
+        <td>MAX_NUM_THREADS</td>
+        <td>Controls which GPUs CUDA applications will see. By default, all GPUs from the host are used. You can either use all, none, or specify a comma-separated list of device IDs (e.g. 0,1). You can find out the list of available device IDs by running nvidia-smi on the host machine.</td>
+        <td>auto</td>
+    </tr>
+    <tr>
+        <td>NVIDIA_VISIBLE_DEVICES</td>
+        <td>(GPU only) Controls which GPUs will be accessible by the job. By default, all GPUs from the host are used. You can either use all, none, or specify a comma-separated list of device IDs (e.g. 0,1). You can find out the list of available device IDs by running nvidia-smi on the host machine.</td>
+        <td>all</td>
+    </tr>
+        <tr>
+        <td>CUDA_VISIBLE_DEVICES</td>
+        <td>(GPU only) Controls which GPUs will be accessible by the job. By default, all GPUs that the job has access to will be visible. To restrict the job, provide a comma-separated list of internal device IDs (e.g. 0,2) based on the available devices within the container job (run nvidia-smi). In comparison to NVIDIA_VISIBLE_DEVICES, the job user will still able to access other GPUs by overwriting this configuration from within the container.</td>
+        <td>all</td>
     </tr>
     <tr>
         <td colspan="3"><b>Cloud Config:</d></td>

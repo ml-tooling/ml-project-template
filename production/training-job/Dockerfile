@@ -39,24 +39,21 @@ RUN \
      chmod +x ~/miniconda.sh && \
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
-     /opt/conda/bin/conda install -y python=$PYTHON_VERSION setuptools typing setuptools && \
+     /opt/conda/bin/conda install -y python=$PYTHON_VERSION setuptools typing && \
      /opt/conda/bin/pip install --upgrade pip && \
      /opt/conda/bin/conda clean -ya
 
 ENV PATH /opt/conda/bin:$PATH
 
 # Install training requirements
-COPY docker-res/requirements.txt "/tmp/"
-RUN pip install -r "tmp/requirements.txt"
+# COPY docker-res/requirements.txt "/tmp/"
+# RUN pip install -r "tmp/requirements.txt"
 
 
 # Set *predefined* paths/variables
-ENV TRAIN_SET_URL="" \
-    TEST_SET_URL="" \
-    RESOURCES_PATH="/resources" \ 
-    DATA_PATH="/data" \ 
-    LOG_PATH="/logs" 
-        
+ENV RESOURCES_PATH="/resources" \ 
+    DATA_PATH="/data" 
+
 RUN \
     mkdir -p $RESOURCES_PATH && \
     mkdir -p $DATA_PATH && \
@@ -66,10 +63,12 @@ RUN \
 ENV N_EPOCHS="10" \ 
     SEED="1337" \
     NVIDIA_VISIBLE_DEVICES="all" \
-    OMP_NUM_THREADS="8" 
+    CUDA_VISIBLE_DEVICES="all" \
+    MAX_NUM_THREADS="auto" 
     
 # Copy resources
 COPY docker-res/run.py "$RESOURCES_PATH/"
+COPY docker-res/config.py "$RESOURCES_PATH/"
 
 # Run run.py via tini
 ENTRYPOINT ["/tini", "--", "python", "/resources/run.py"]
