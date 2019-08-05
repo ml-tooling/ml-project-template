@@ -11,8 +11,8 @@ logging.basicConfig(
 # gets env vars + set up MAX_NUM_THREADS
 from config import *
 # training_utils imports
-from training_utils.trainer import Trainer
-from training_utils.data import get_data, DataBunch
+from utils.trainer import Trainer
+from utils.data import get_data, DataBunch
 
 logger = logging.getLogger(__name__)
 
