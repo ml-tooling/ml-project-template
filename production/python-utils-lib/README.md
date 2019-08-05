@@ -1,4 +1,4 @@
-# Utils lib for the training job
+# Python utils used across the project
 
 ## Requirements
 
