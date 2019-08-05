@@ -2,7 +2,8 @@
 
 ## Description
 
-This container deploys a model as an API enndpoing using the FastAPI framework and Docker.
+This container deploys a model as an API endpoing using the FastAPI framework and Docker.
+Once run, go to http://0.0.0.0:8000/docs to check out the auto-generated API docs.
 
 ## Usage 
 
